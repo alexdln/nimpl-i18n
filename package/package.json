@@ -1,6 +1,6 @@
 {
   "name": "@nimpl/i18n",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "i18n library for working with translations in server and client components",
   "exports": {
     "./ClientTranslation": {
@@ -48,12 +48,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/vordgi/nimpl-i18n.git"
+    "url": "git://github.com/alexdln/nimpl-i18n.git"
   },
   "author": {
-    "name": "Savelyev Alexander",
-    "email": "vordgi1@gmail.com",
-    "url": "https://github.com/vordgi/"
+    "name": "Alex Savelyev",
+    "email": "dev@alexdln.com",
+    "url": "https://github.com/alexdln/"
   },
   "license": "MIT",
   "devDependencies": {

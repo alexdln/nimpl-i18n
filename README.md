@@ -14,9 +14,9 @@ This library is an attempt to create a highly optimized solution exclusively usi
 
 ## Features
 
-Support for loading translations during page rendering (*instead of the application build step*), allowing for up-to-date translations with ISR or SSR;
+Support for loading translations during page rendering (_instead of the application build step_), allowing for up-to-date translations with ISR or SSR;
 
-Support for revalidation logic, i.e. you can specify how often translations should be updated (*or that they should not be updated at all*);
+Support for revalidation logic, i.e. you can specify how often translations should be updated (_or that they should not be updated at all_);
 
 Optimized caching system - not a single extra request will be sent, even with parallel building (which is now enabled by default);
 
@@ -46,4 +46,4 @@ Create tasks with wishes, ideas, difficulties, etc. All of them will definitely 
 
 ## License
 
-[MIT](https://github.com/vordgi/nimpl-i18n/blob/main/LICENSE)
+[MIT](https://github.com/alexdln/nimpl-i18n/blob/main/LICENSE)

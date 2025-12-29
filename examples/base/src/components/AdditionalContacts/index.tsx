@@ -18,10 +18,10 @@ export default function AdditionalContacts() {
                         term="additionalContacts.headerAbove"
                         components={{
                             hookLink: (
-                                <a href="https://github.com/vordgi/nimpl-i18n?tab=readme-ov-file#client-components" />
+                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />
                             ),
                             componentLink: (
-                                <a href="https://github.com/vordgi/nimpl-i18n?tab=readme-ov-file#client-components" />
+                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />
                             ),
                         }}
                     />

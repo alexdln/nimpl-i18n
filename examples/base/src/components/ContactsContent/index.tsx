@@ -8,7 +8,7 @@ export default function ContactsContent() {
                     term="contactsContent.title"
                     components={{
                         link: (
-                            <a href="https://github.com/vordgi/nimpl-i18n/examples/base/src/app/%5Blang%5D/contacts/page.tsx" />
+                            <a href="https://github.com/alexdln/nimpl-i18n/examples/base/src/app/%5Blang%5D/contacts/page.tsx" />
                         ),
                     }}
                 />

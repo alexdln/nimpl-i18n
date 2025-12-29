@@ -21,19 +21,19 @@ const getConfig = async (): Promise<Config> => {
     const { load, getLanguage, languages } = clientConfig;
     if (!load) {
         throw new Error(
-            `Can't find "load" method in configuration file - https://github.com/vordgi/nimpl-i18n#configuration`,
+            `Can't find "load" method in configuration file - https://github.com/alexdln/nimpl-i18n#configuration`,
         );
     }
 
     if (!languages) {
         throw new Error(
-            `Can't find "languages" list in configuration file - https://github.com/vordgi/nimpl-i18n#configuration`,
+            `Can't find "languages" list in configuration file - https://github.com/alexdln/nimpl-i18n#configuration`,
         );
     }
 
     if (!getLanguage) {
         throw new Error(
-            `Can't find "getLanguage" method in configuration file - https://github.com/vordgi/nimpl-i18n#configuration`,
+            `Can't find "getLanguage" method in configuration file - https://github.com/alexdln/nimpl-i18n#configuration`,
         );
     }
 
