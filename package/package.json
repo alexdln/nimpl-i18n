@@ -68,7 +68,7 @@
     "react": ">= 19.1.0"
   },
   "dependencies": {
-    "@nimpl/getters": "2.1.1",
+    "@nimpl/getters": "2.2.1",
     "html-entities": "2.4.0",
     "object-path": "0.11.8"
   }
