@@ -12,10 +12,10 @@ export default async function Intro({ page }: { page: string }) {
                     term="intro.description"
                     components={{
                         getterLink: (
-                            <a href="https://github.com/vordgi/nimpl-i18n?tab=readme-ov-file#server-components" />
+                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components" />
                         ),
                         componentLink: (
-                            <a href="https://github.com/vordgi/nimpl-i18n?tab=readme-ov-file#server-components" />
+                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components" />
                         ),
                     }}
                 />

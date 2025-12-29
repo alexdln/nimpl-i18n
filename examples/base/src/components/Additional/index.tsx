@@ -14,7 +14,7 @@ export default async function Additional({ page }: { page: string }) {
                 <ServerTranslation
                     term="additional.toTransfer"
                     components={{
-                        link: <a href="https://github.com/vordgi/nimpl-i18n?tab=readme-ov-file#client-components" />,
+                        link: <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />,
                     }}
                 />
             </p>

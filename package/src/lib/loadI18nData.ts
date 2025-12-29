@@ -5,7 +5,14 @@ import { getParams } from "@nimpl/getters/get-params";
 
 const loadI18nData = async (): Promise<{ dictionary: Translates; language: string }> => {
     const config = await getConfig();
-    const language = await config.getLanguage({ pathname: getPathname(), params: getParams() });
+    const language = await config.getLanguage({
+        get pathname() {
+            return getPathname();
+        },
+        get params() {
+            return getParams();
+        },
+    });
 
     if (!language || !config.languages.includes(language)) {
         throw new Error(
