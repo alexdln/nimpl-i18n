@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { type Query } from "../types";
 
 export type InjectQueryArg = {

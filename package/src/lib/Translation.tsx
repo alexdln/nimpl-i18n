@@ -17,7 +17,6 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
         const tags = text.match(/<\/?[a-zA-Z0-9]+>|<[a-zA-Z0-9]+ ?\/>/gm);
         const openedTags: { tag: string; position: number }[] = [];
         tags?.forEach((tag, tagIndex) => {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const tagName = tag.match(/[a-zA-Z0-9]+/)![0];
             if (tag.match(/<[a-zA-Z0-9]+ ?\/>/)) {
                 const component = components[tagName as keyof typeof components];

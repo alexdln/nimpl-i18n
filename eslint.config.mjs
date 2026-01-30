@@ -1,9 +1,12 @@
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import tseslint from "typescript-eslint";
+import { includeIgnoreFile } from "@eslint/compat";
+import { fileURLToPath } from "node:url";
 
-const ignores = ["**/node_modules/**", "**/dist/**"];
+const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default [
+    includeIgnoreFile(gitignorePath, "Imported .gitignore patterns"),
     eslintPluginPrettierRecommended,
     ...tseslint.configs.recommended,
     {
@@ -19,4 +22,4 @@ export default [
             ],
         },
     },
-].map((r) => Object.assign(r, { ignores }));
+];
