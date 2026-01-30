@@ -1,0 +1,65 @@
+name: Publish experimental package
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  publish-experimental:
+    runs-on: ubuntu-latest
+
+    if: |
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      ${{ github.head_ref != 'main' && !startsWith(github.head_ref, 'canary') }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm --filter nimpl-i18n-tests test
+
+      - name: Build package
+        run: |
+          pnpm --filter @nimpl/i18n build
+          cp README.md ./package
+          cp LICENSE ./package
+
+      - name: Compute experimental version
+        id: version
+        run: |
+          HASH=$(git rev-parse --short HEAD)
+          echo "version=0.0.0-experimental-${HASH}" >> $GITHUB_OUTPUT
+
+      - name: Check if version already published
+        id: check
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          EXISTS=$(npm view @nimpl/i18n@$VERSION version 2>/dev/null || true)
+          if [ -z "$EXISTS" ]; then
+            echo "publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "publish=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish experimental package
+        if: steps.check.outputs.publish == 'true'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          VERSION=${{ steps.version.outputs.version }}
+          npm version --no-git-tag-version $VERSION
+          npm publish --tag experimental --access public
+        working-directory: ./package
