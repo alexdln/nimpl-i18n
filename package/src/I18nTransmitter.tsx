@@ -23,7 +23,6 @@ const formatServerTranslates = (
     if (!translates) return;
 
     if (typeof translates === "string") {
-        // eslint-disable-next-line no-param-reassign
         result[targetKey] = formatServerTranslate({ term: targetKey, text: translates, parseEntities: true, ...opts });
     } else {
         Object.entries(translates).forEach(([subKey, translate]) => {

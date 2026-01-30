@@ -4,13 +4,14 @@
   "description": "",
   "scripts": {
     "nimpl:i18n": "pnpm --filter @nimpl/i18n",
-    "lint": "eslint \"package/\"",
+    "lint": "eslint \".\"",
     "eslint": "eslint",
     "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "devDependencies": {
+    "@eslint/compat": "2.0.1",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.5",
