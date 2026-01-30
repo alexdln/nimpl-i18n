@@ -24,9 +24,21 @@ describe("ClientTranslation", () => {
     });
 
     it("renders translation with components", () => {
-        render(<ClientTranslation term="common:link" components={{ a: <a href="#" data-testid="link" /> }} />, {
-            wrapper,
-        });
+        render(
+            <ClientTranslation
+                term="common:link"
+                components={{
+                    a: ({ children }) => (
+                        <a href="#" data-testid="link">
+                            {children}
+                        </a>
+                    ),
+                }}
+            />,
+            {
+                wrapper,
+            },
+        );
         expect(screen.getByTestId("link")).toBeInTheDocument();
         expect(screen.getByText("here")).toBeInTheDocument();
     });

@@ -2,10 +2,10 @@
 
 import React from "react";
 
-type TranslationProps = {
+export type TranslationProps = {
     term: string;
     text: string;
-    components?: { [key: string]: React.ReactElement };
+    components?: { [key: string]: React.ComponentType<{ children?: React.ReactNode }> };
 };
 
 type ParsedTag = {
@@ -55,20 +55,16 @@ const splitByTags = (text: string): { parts: string[]; tags: string[] } => {
 
 const Translation = ({ term, text, components }: TranslationProps): React.ReactNode[] => {
     const { parts: textParts, tags } = splitByTags(text);
-    const parts: React.ReactElement[] = textParts.map((el, i) => <React.Fragment key={`p-${i}`}>{el}</React.Fragment>);
+    const parts = textParts.map((el, i) => <React.Fragment key={`p-${i}`}>{el}</React.Fragment>);
 
     if (components) {
         const openedTags: { tag: string; position: number }[] = [];
         tags.forEach((tag, tagIndex) => {
             const { name: tagName, type: tagType } = parseTag(tag);
             if (tagType === "self") {
-                const component = components[tagName as keyof typeof components];
-                if (component) {
-                    parts.splice(
-                        tagIndex + 1,
-                        1,
-                        React.cloneElement(component, { key: `c-${tagIndex}` }, (component.props as any).children),
-                    );
+                const Component = components[tagName as keyof typeof components];
+                if (Component) {
+                    parts.splice(tagIndex + 1, 1, <Component key={`c-${tagIndex}`} />);
                 } else {
                     console.warn(`Unknown component for term "${term}" - ${tagName}`);
                 }
@@ -80,8 +76,8 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
                     for (let i = openedTagsLength; i > lastOpenedIndex; i--) {
                         const targetIndex = i - 1;
                         const targetTag = openedTags[targetIndex];
-                        const component = components[targetTag.tag as keyof typeof components];
-                        if (component) {
+                        const Component = components[targetTag.tag as keyof typeof components];
+                        if (Component) {
                             const children = parts
                                 .slice(targetTag.position + 1, tagIndex + 1)
                                 .filter((child) =>
@@ -95,11 +91,7 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
                             parts.splice(
                                 targetTag.position + 1,
                                 tagIndex - targetTag.position,
-                                React.cloneElement(
-                                    component,
-                                    { key: `${tagIndex}-${targetIndex}` },
-                                    children.length ? children : (component.props as any).children,
-                                ),
+                                <Component key={`${tagIndex}-${targetIndex}`}>{children}</Component>,
                             );
                         } else {
                             console.warn(`Unknown component for term "${term}" - ${targetTag}`);

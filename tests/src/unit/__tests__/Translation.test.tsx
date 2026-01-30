@@ -14,7 +14,7 @@ describe("Translation", () => {
                 {Translation({
                     term: "test",
                     text: "Click <br />here",
-                    components: { br: <br data-testid="br" /> },
+                    components: { br: () => <br data-testid="br" /> },
                 })}
             </>,
         );
@@ -27,7 +27,9 @@ describe("Translation", () => {
                 {Translation({
                     term: "test",
                     text: "Hello <b>World</b>!",
-                    components: { b: <strong /> },
+                    components: {
+                        b: (props) => <strong {...props} />,
+                    },
                 })}
             </>,
         );
@@ -42,8 +44,8 @@ describe("Translation", () => {
                     term: "test",
                     text: "<a>Click <b>here</b></a>",
                     components: {
-                        a: <a href="#" data-testid="link" />,
-                        b: <strong />,
+                        a: (props) => <a href="#" data-testid="link" {...props} />,
+                        b: (props) => <strong {...props} />,
                     },
                 })}
             </>,
@@ -51,6 +53,7 @@ describe("Translation", () => {
         const link = screen.getByTestId("link");
         expect(link).toBeInTheDocument();
         expect(link.querySelector("strong")).toBeInTheDocument();
+        expect(link.innerHTML).toBe("Click <strong>here</strong>");
     });
 
     it("preserves component children as fallback", () => {
@@ -59,7 +62,13 @@ describe("Translation", () => {
                 {Translation({
                     term: "test",
                     text: "Read <link />",
-                    components: { link: <a href="#">more</a> },
+                    components: {
+                        link: (props) => (
+                            <a href="#" {...props}>
+                                more
+                            </a>
+                        ),
+                    },
                 })}
             </>,
         );
