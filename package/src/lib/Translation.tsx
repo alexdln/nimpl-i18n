@@ -8,17 +8,60 @@ type TranslationProps = {
     components?: { [key: string]: React.ReactElement };
 };
 
+type ParsedTag = {
+    name: string;
+    type: "open" | "close" | "self";
+};
+
+const parseTag = (tag: string): ParsedTag => {
+    const isSelfClosing = tag.endsWith("/>");
+    const isClosing = tag[1] === "/";
+    const start = isClosing ? 2 : 1;
+    const end = isSelfClosing
+        ? tag.indexOf(" ") !== -1 && tag.indexOf(" ") < tag.length - 2
+            ? tag.indexOf(" ")
+            : tag.length - 2
+        : tag.length - 1;
+    return {
+        name: tag.slice(start, end),
+        type: isSelfClosing ? "self" : isClosing ? "close" : "open",
+    };
+};
+
+const splitByTags = (text: string): { parts: string[]; tags: string[] } => {
+    const parts: string[] = [];
+    const tags: string[] = [];
+    let current = "";
+    let i = 0;
+
+    while (i < text.length) {
+        if (text[i] === "<") {
+            const closeIndex = text.indexOf(">", i);
+            if (closeIndex !== -1) {
+                parts.push(current);
+                current = "";
+                tags.push(text.slice(i, closeIndex + 1));
+                i = closeIndex + 1;
+                continue;
+            }
+        }
+        current += text[i];
+        i++;
+    }
+    parts.push(current);
+
+    return { parts, tags };
+};
+
 const Translation = ({ term, text, components }: TranslationProps): React.ReactNode[] => {
-    const parts: React.ReactElement[] = text
-        .split(/<\/?[a-zA-Z0-9]+>|<[a-zA-Z0-9]+ ?\/>/gm)
-        .map((el, i) => <React.Fragment key={`p-${i}`}>{el}</React.Fragment>);
+    const { parts: textParts, tags } = splitByTags(text);
+    const parts: React.ReactElement[] = textParts.map((el, i) => <React.Fragment key={`p-${i}`}>{el}</React.Fragment>);
 
     if (components) {
-        const tags = text.match(/<\/?[a-zA-Z0-9]+>|<[a-zA-Z0-9]+ ?\/>/gm);
         const openedTags: { tag: string; position: number }[] = [];
-        tags?.forEach((tag, tagIndex) => {
-            const tagName = tag.match(/[a-zA-Z0-9]+/)![0];
-            if (tag.match(/<[a-zA-Z0-9]+ ?\/>/)) {
+        tags.forEach((tag, tagIndex) => {
+            const { name: tagName, type: tagType } = parseTag(tag);
+            if (tagType === "self") {
                 const component = components[tagName as keyof typeof components];
                 if (component) {
                     parts.splice(
@@ -29,7 +72,7 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
                 } else {
                     console.warn(`Unknown component for term "${term}" - ${tagName}`);
                 }
-            } else if (tag.match(/<\/[a-zA-Z0-9]+>/)) {
+            } else if (tagType === "close") {
                 const openedTagIndex = openedTags.findIndex((i) => i.tag === tagName);
                 if (openedTagIndex !== -1) {
                     const lastOpenedIndex = openedTags.length - 1 - openedTagIndex;
@@ -41,11 +84,16 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
                         if (component) {
                             const children = parts
                                 .slice(targetTag.position + 1, tagIndex + 1)
-                                .filter((c) =>
-                                    Boolean(c && typeof c === "object" && "props" in c && (c.props as any).children),
+                                .filter((child) =>
+                                    Boolean(
+                                        child &&
+                                        typeof child === "object" &&
+                                        "props" in child &&
+                                        (child.props as any).children,
+                                    ),
                                 );
                             parts.splice(
-                                targetTag.position + 1, // parts на 1 больше
+                                targetTag.position + 1,
                                 tagIndex - targetTag.position,
                                 React.cloneElement(
                                     component,

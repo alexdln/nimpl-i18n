@@ -8,19 +8,32 @@ export type InjectQueryArg = {
 };
 
 const injectQuery = ({ text, query, removeUnusedQueries }: InjectQueryArg): string => {
-    const newText = text.replace(/{{([a-zA-Z0-9_-]+)}}/gm, (matched, g1) => {
-        if (query[g1]) {
-            return query[g1].toString();
-        }
+    let result = "";
+    let i = 0;
 
-        if (removeUnusedQueries) {
-            return "";
-        } else {
-            return matched;
+    while (i < text.length) {
+        if (text[i] === "{" && text[i + 1] === "{") {
+            const closeIndex = text.indexOf("}}", i + 2);
+            if (closeIndex !== -1) {
+                const key = text.slice(i + 2, closeIndex);
+                const value = query[key];
+                if (value !== undefined) {
+                    result += value.toString();
+                } else {
+                    console.warn(`Query key "${key}" not found in options for "${text}"`);
+                    if (!removeUnusedQueries) {
+                        result += text.slice(i, closeIndex + 2);
+                    }
+                }
+                i = closeIndex + 2;
+                continue;
+            }
         }
-    });
+        result += text[i];
+        i++;
+    }
 
-    return newText;
+    return result;
 };
 
 export default injectQuery;
