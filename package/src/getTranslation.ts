@@ -1,11 +1,12 @@
 import op from "object-path";
-import formatServerTranslate from "./lib/formatServerTranslate";
+
 import { type I18nOptions } from "./types";
-import loadI18nData from "./lib/loadI18nData";
+import { formatServerTranslate } from "./lib/formatServerTranslate";
+import { loadI18nData } from "./lib/loadI18nData";
 
 type GetTranslationReturnType = { t: (term: string, opts?: I18nOptions) => string; language: string };
 
-const getTranslation = async (options?: {
+export const getTranslation = async (options?: {
     language?: string;
     namespace?: string;
 }): Promise<GetTranslationReturnType> => {
@@ -41,5 +42,3 @@ const getTranslation = async (options?: {
 
     return { t, language };
 };
-
-export default getTranslation;

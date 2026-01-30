@@ -1,4 +1,4 @@
-import formatServerTranslate from "@nimpl/i18n/lib/formatServerTranslate";
+import { formatServerTranslate } from "@nimpl/i18n/lib/formatServerTranslate";
 
 describe("formatServerTranslate", () => {
     it("injects query and parses entities by default", () => {

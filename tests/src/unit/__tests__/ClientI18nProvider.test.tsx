@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { render, screen } from "@testing-library/react";
 import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
-import ClientI18nProvider from "@nimpl/i18n/lib/ClientI18nProvider";
+import { ClientI18nProvider } from "@nimpl/i18n/lib/ClientI18nProvider";
 
 const Consumer = () => {
     const context = useContext(ClientI18nContext);

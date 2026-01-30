@@ -1,7 +1,7 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
 import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
-import useTranslation from "@nimpl/i18n/useTranslation";
+import { useTranslation } from "@nimpl/i18n/useTranslation";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
     <ClientI18nContext.Provider value={{ language: "en", translates: { "common.hello": "Hello" } }}>

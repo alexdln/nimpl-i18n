@@ -1,7 +1,8 @@
 import React from "react";
+
 import { type I18nOptions } from "./types";
-import Translation, { type TranslationProps } from "./lib/Translation";
-import getTranslation from "./getTranslation";
+import { Translation, type TranslationProps } from "./lib/Translation";
+import { getTranslation } from "./getTranslation";
 
 type ServerTranslationProps = {
     term: string;
@@ -11,7 +12,7 @@ type ServerTranslationProps = {
     language?: string;
 };
 
-const ServerTranslation: React.FC<ServerTranslationProps> = async ({
+export const ServerTranslation: React.FC<ServerTranslationProps> = async ({
     term,
     components,
     query,
@@ -23,5 +24,3 @@ const ServerTranslation: React.FC<ServerTranslationProps> = async ({
 
     return <Translation term={term} text={text} components={components} />;
 };
-
-export default ServerTranslation;

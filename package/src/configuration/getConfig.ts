@@ -7,7 +7,7 @@ const CONFIG_PATH = path.join(process.cwd(), "nimpl-i18n.js");
 // Crutch bypass of conversion by the assembler to require
 const dynamicImport = new Function("p", "return import(p)");
 
-const getConfig = async (): Promise<Config> => {
+export const getConfig = async (): Promise<Config> => {
     let clientConfig: Config;
     if (fs.existsSync(CONFIG_PATH)) {
         const config: { default: Config } = await dynamicImport(pathToFileURL(CONFIG_PATH).href);
@@ -39,5 +39,3 @@ const getConfig = async (): Promise<Config> => {
 
     return clientConfig;
 };
-
-export default getConfig;

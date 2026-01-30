@@ -3,8 +3,8 @@
 import React from "react";
 
 import { type I18nOptions } from "./types";
-import Translation, { type TranslationProps } from "./lib/Translation";
-import useTranslation from "./useTranslation";
+import { Translation, type TranslationProps } from "./lib/Translation";
+import { useTranslation } from "./useTranslation";
 
 type ClientTranslationProps = {
     term: string;
@@ -13,11 +13,14 @@ type ClientTranslationProps = {
     removeUnusedQueries?: I18nOptions["removeUnusedQueries"];
 };
 
-const ClientTranslation: React.FC<ClientTranslationProps> = ({ term, components, query, removeUnusedQueries }) => {
+export const ClientTranslation: React.FC<ClientTranslationProps> = ({
+    term,
+    components,
+    query,
+    removeUnusedQueries,
+}) => {
     const { t } = useTranslation();
     const text = t(term, { query, removeUnusedQueries });
 
     return <Translation term={term} text={text} components={components} />;
 };
-
-export default ClientTranslation;
