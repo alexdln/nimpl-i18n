@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
+
 import { type I18nOptions } from "./types";
-import Translation from "./lib/Translation";
+import Translation, { type TranslationProps } from "./lib/Translation";
 import useTranslation from "./useTranslation";
 
 type ClientTranslationProps = {
     term: string;
-    components?: { [key: string]: React.ReactElement };
+    components?: TranslationProps["components"];
     query?: I18nOptions["query"];
     removeUnusedQueries?: I18nOptions["removeUnusedQueries"];
 };
