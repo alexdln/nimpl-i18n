@@ -7,7 +7,7 @@ export type InjectQueryArg = {
     removeUnusedQueries?: boolean;
 };
 
-const injectQuery = ({ text, query, removeUnusedQueries }: InjectQueryArg): string => {
+export const injectQuery = ({ text, query, removeUnusedQueries }: InjectQueryArg): string => {
     let result = "";
     let i = 0;
 
@@ -35,5 +35,3 @@ const injectQuery = ({ text, query, removeUnusedQueries }: InjectQueryArg): stri
 
     return result;
 };
-
-export default injectQuery;

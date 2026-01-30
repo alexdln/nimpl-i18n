@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
-import ClientTranslation from "@nimpl/i18n/ClientTranslation";
+import { ClientTranslation } from "@nimpl/i18n/ClientTranslation";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
     <ClientI18nContext.Provider

@@ -4,7 +4,7 @@ import { existsSync } from "fs";
 import path from "path";
 
 const CONFIG_PATH = path.join(process.cwd(), "nimpl-i18n.js");
-const i18n = () => {
+export const i18n = () => {
     return (nextConfig: any = {}) => {
         return {
             ...nextConfig,
@@ -25,5 +25,3 @@ const i18n = () => {
         };
     };
 };
-
-export default i18n;

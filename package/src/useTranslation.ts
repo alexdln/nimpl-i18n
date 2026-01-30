@@ -1,11 +1,12 @@
 import { useContext } from "react";
+
 import { type I18nOptions } from "./types";
 import { ClientI18nContext } from "./lib/ClientI18nContext";
-import injectQuery from "./lib/injectQuery";
+import { injectQuery } from "./lib/injectQuery";
 
 type GetTranslationReturnType = { t: (term: string, opts?: I18nOptions) => string; language: string };
 
-const useTranslation = ({ namespace }: { namespace?: string } = {}): GetTranslationReturnType => {
+export const useTranslation = ({ namespace }: { namespace?: string } = {}): GetTranslationReturnType => {
     const context = useContext(ClientI18nContext);
 
     if (!context) {
@@ -41,5 +42,3 @@ const useTranslation = ({ namespace }: { namespace?: string } = {}): GetTranslat
 
     return { t, language };
 };
-
-export default useTranslation;

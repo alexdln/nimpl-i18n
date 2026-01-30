@@ -53,7 +53,7 @@ const splitByTags = (text: string): { parts: string[]; tags: string[] } => {
     return { parts, tags };
 };
 
-const Translation = ({ term, text, components }: TranslationProps): React.ReactNode[] => {
+export const Translation = ({ term, text, components }: TranslationProps): React.ReactNode[] => {
     const { parts: textParts, tags } = splitByTags(text);
     const parts = textParts.map((el, i) => <React.Fragment key={`p-${i}`}>{el}</React.Fragment>);
 
@@ -107,5 +107,3 @@ const Translation = ({ term, text, components }: TranslationProps): React.ReactN
 
     return parts;
 };
-
-export default Translation;

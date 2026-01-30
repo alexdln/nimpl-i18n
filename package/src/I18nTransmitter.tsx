@@ -1,9 +1,10 @@
 import React from "react";
 import op from "object-path";
+
 import { type I18nOptions, type Translates } from "./types";
-import ClientI18nProvider from "./lib/ClientI18nProvider";
-import formatServerTranslate from "./lib/formatServerTranslate";
-import loadI18nData from "./lib/loadI18nData";
+import { ClientI18nProvider } from "./lib/ClientI18nProvider";
+import { formatServerTranslate } from "./lib/formatServerTranslate";
+import { loadI18nData } from "./lib/loadI18nData";
 
 export type I18nTransmitterProps = {
     terms: (string | [string, I18nOptions])[];
@@ -31,7 +32,7 @@ const formatServerTranslates = (
     }
 };
 
-const I18nTransmitter: React.FC<I18nTransmitterProps> = async ({
+export const I18nTransmitter: React.FC<I18nTransmitterProps> = async ({
     language: argLanguage,
     terms,
     children,
@@ -64,5 +65,3 @@ const I18nTransmitter: React.FC<I18nTransmitterProps> = async ({
         </ClientI18nProvider>
     );
 };
-
-export default I18nTransmitter;
