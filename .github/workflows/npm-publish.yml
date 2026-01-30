@@ -10,22 +10,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: "24"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
+        uses: pnpm/action-setup@v4
 
-      - name: Install deps and Build package
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm --filter nimpl-i18n-tests test
+
+      - name: Build package
         run: |
-          pnpm install
-          pnpm nimpl:i18n run build
+          pnpm --filter @nimpl/i18n build
           cp README.md ./package
           cp LICENSE ./package
 
