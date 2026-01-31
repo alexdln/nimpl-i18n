@@ -1,7 +1,7 @@
 import React from "react";
 
 import { type Translates, type I18nOptions } from "../types";
-import { Translation, type TranslationProps } from "./Translation";
+import { Translation, type TranslationProps } from "./translation";
 import { getTranslationCore } from "./get-translation-core";
 
 export type TranslationCoreProps = {

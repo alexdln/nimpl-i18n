@@ -3,8 +3,8 @@
   "version": "3.0.1",
   "description": "i18n library for working with translations in server and client components",
   "exports": {
-    "./ClientTranslation": {
-      "default": "./dist/ClientTranslation.js"
+    "./client-translation": {
+      "default": "./dist/client-translation.js"
     },
     "./initialize": {
       "default": "./dist/initialize.js"
@@ -12,8 +12,8 @@
     "./types": {
       "default": "./dist/types.js"
     },
-    "./useTranslation": {
-      "default": "./dist/useTranslation.js"
+    "./use-translation": {
+      "default": "./dist/use-translation.js"
     }
   },
   "files": [

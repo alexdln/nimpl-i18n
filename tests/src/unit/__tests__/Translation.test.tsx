@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Translation } from "@nimpl/i18n/lib/Translation";
+import { Translation } from "@nimpl/i18n/lib/translation";
 
 describe("Translation", () => {
     it("renders plain text", () => {

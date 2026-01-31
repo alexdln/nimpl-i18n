@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
-import { ClientTranslation } from "@nimpl/i18n/ClientTranslation";
+import { ClientContext } from "@nimpl/i18n/lib/client-context";
+import { ClientTranslation } from "@nimpl/i18n/client-translation";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ClientI18nContext.Provider
+    <ClientContext.Provider
         value={{
             language: "en",
             translates: {
@@ -14,7 +14,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
         }}
     >
         {children}
-    </ClientI18nContext.Provider>
+    </ClientContext.Provider>
 );
 
 describe("ClientTranslation", () => {

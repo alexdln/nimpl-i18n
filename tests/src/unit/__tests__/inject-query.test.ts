@@ -1,4 +1,4 @@
-import { injectQuery } from "@nimpl/i18n/lib/injectQuery";
+import { injectQuery } from "@nimpl/i18n/lib/inject-query";
 
 describe("injectQuery", () => {
     it("replaces single placeholder", () => {

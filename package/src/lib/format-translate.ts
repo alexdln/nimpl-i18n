@@ -1,6 +1,6 @@
 import { decode } from "html-entities";
 
-import { injectQuery, type InjectQueryArg } from "./injectQuery";
+import { injectQuery, type InjectQueryArg } from "./inject-query";
 
 export interface FormatTranslateOptions extends Omit<InjectQueryArg, "query"> {
     parseEntities?: boolean;

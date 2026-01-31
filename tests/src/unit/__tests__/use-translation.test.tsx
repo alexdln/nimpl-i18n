@@ -1,12 +1,12 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
-import { useTranslation } from "@nimpl/i18n/useTranslation";
+import { ClientContext } from "@nimpl/i18n/lib/client-context";
+import { useTranslation } from "@nimpl/i18n/use-translation";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ClientI18nContext.Provider value={{ language: "en", translates: { "common.hello": "Hello" } }}>
+    <ClientContext.Provider value={{ language: "en", translates: { "common.hello": "Hello" } }}>
         {children}
-    </ClientI18nContext.Provider>
+    </ClientContext.Provider>
 );
 
 describe("useTranslation", () => {
@@ -36,9 +36,9 @@ describe("useTranslation", () => {
 
     it("injects query parameters", () => {
         const customWrapper = ({ children }: { children: React.ReactNode }) => (
-            <ClientI18nContext.Provider value={{ language: "en", translates: { greeting: "Hello, {{name}}!" } }}>
+            <ClientContext.Provider value={{ language: "en", translates: { greeting: "Hello, {{name}}!" } }}>
                 {children}
-            </ClientI18nContext.Provider>
+            </ClientContext.Provider>
         );
         const { result } = renderHook(() => useTranslation(), { wrapper: customWrapper });
         expect(result.current.t("greeting", { query: { name: "World" } })).toBe("Hello, World!");
@@ -46,9 +46,9 @@ describe("useTranslation", () => {
 
     it("removes unused queries when option set", () => {
         const customWrapper = ({ children }: { children: React.ReactNode }) => (
-            <ClientI18nContext.Provider value={{ language: "en", translates: { text: "Value: {{missing}}" } }}>
+            <ClientContext.Provider value={{ language: "en", translates: { text: "Value: {{missing}}" } }}>
                 {children}
-            </ClientI18nContext.Provider>
+            </ClientContext.Provider>
         );
         const { result } = renderHook(() => useTranslation(), { wrapper: customWrapper });
         expect(result.current.t("text", { query: {}, removeUnusedQueries: true })).toBe("Value: ");

@@ -199,7 +199,7 @@ Client-side hook. Requires `Transmitter` in a parent Server Component.
 ```tsx
 "use client";
 
-import { useTranslation } from "@nimpl/i18n/useTranslation";
+import { useTranslation } from "@nimpl/i18n/use-translation";
 
 export default function Counter() {
   const { t } = useTranslation();
@@ -221,7 +221,7 @@ Client component for complex translations with embedded JSX.
 ```tsx
 "use client";
 
-import { ClientTranslation } from "@nimpl/i18n/ClientTranslation";
+import { ClientTranslation } from "@nimpl/i18n/client-translation";
 
 // Translation: "Read our <link>documentation</link>"
 export default function Info() {

@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import { type Config } from "@nimpl/i18n/types";
 import { initialize } from "@nimpl/i18n/initialize";
-import { ClientI18nContext } from "@nimpl/i18n/lib/ClientI18nContext";
+import { ClientContext } from "@nimpl/i18n/lib/client-context";
 
 const resolveAsyncComponent = async (element: React.ReactElement) => {
     const Component = element.type as (props: unknown) => Promise<React.ReactElement>;
@@ -153,7 +153,7 @@ describe("initialize", () => {
 
     describe("Transmitter", () => {
         const ContextConsumer = () => {
-            const context = React.useContext(ClientI18nContext);
+            const context = React.useContext(ClientContext);
             return (
                 <div>
                     <span data-testid="lang">{context?.language}</span>
