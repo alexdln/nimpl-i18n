@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import useTranslation from "@nimpl/i18n/useTranslation";
-import ClientTranslation from "@nimpl/i18n/ClientTranslation";
+import { useTranslation } from "@nimpl/i18n/use-translation";
+import { ClientTranslation } from "@nimpl/i18n/client-translation";
 
 export default function AdditionalContacts() {
     const { t } = useTranslation();
@@ -17,11 +17,15 @@ export default function AdditionalContacts() {
                     <ClientTranslation
                         term="additionalContacts.headerAbove"
                         components={{
-                            hookLink: (
-                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />
+                            hookLink: ({ children }) => (
+                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components">
+                                    {children}
+                                </a>
                             ),
-                            componentLink: (
-                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />
+                            componentLink: ({ children }) => (
+                                <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components">
+                                    {children}
+                                </a>
                             ),
                         }}
                     />

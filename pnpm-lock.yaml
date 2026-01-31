@@ -35,6 +35,9 @@ importers:
 
   examples/base:
     dependencies:
+      '@nimpl/getters':
+        specifier: 2.2.2
+        version: 2.2.2(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@nimpl/i18n':
         specifier: workspace:*
         version: link:../../package
@@ -1218,6 +1221,13 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@nimpl/getters@2.2.2':
+    resolution: {integrity: sha512-7tAaB2uPnf4J4ABVlfYdz0RZEaoGdZf5nGROQBsnedUOkdx+hubooxkNXcZCEvLPY7qR6aq2a5OH/T6mxrV0Ng==}
+    peerDependencies:
+      next: '>= 14.0.0'
+      react: '>= 18.2.0'
+      react-dom: '>= 18.2.0'
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -4571,6 +4581,12 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@16.1.6':
     optional: true
+
+  '@nimpl/getters@2.2.2(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      next: 16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

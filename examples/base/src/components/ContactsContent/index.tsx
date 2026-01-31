@@ -1,4 +1,4 @@
-import ServerTranslation from "@nimpl/i18n/ServerTranslation";
+import { ServerTranslation } from "@src/i18n";
 
 export default function ContactsContent() {
     return (
@@ -7,8 +7,10 @@ export default function ContactsContent() {
                 <ServerTranslation
                     term="contactsContent.title"
                     components={{
-                        link: (
-                            <a href="https://github.com/alexdln/nimpl-i18n/examples/base/src/app/%5Blang%5D/contacts/page.tsx" />
+                        link: ({ children }) => (
+                            <a href="https://github.com/alexdln/nimpl-i18n/examples/base/src/app/%5Blang%5D/contacts/page.tsx">
+                                {children}
+                            </a>
                         ),
                     }}
                 />

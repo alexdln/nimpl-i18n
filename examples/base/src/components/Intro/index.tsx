@@ -1,5 +1,4 @@
-import getTranslation from "@nimpl/i18n/getTranslation";
-import ServerTranslation from "@nimpl/i18n/ServerTranslation";
+import { getTranslation, ServerTranslation } from "@src/i18n";
 
 export default async function Intro({ page }: { page: string }) {
     const { t } = await getTranslation();
@@ -11,11 +10,15 @@ export default async function Intro({ page }: { page: string }) {
                 <ServerTranslation
                     term="intro.description"
                     components={{
-                        getterLink: (
-                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components" />
+                        getterLink: ({ children }) => (
+                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components">
+                                {children}
+                            </a>
                         ),
-                        componentLink: (
-                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components" />
+                        componentLink: ({ children }) => (
+                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#server-components">
+                                {children}
+                            </a>
                         ),
                     }}
                 />

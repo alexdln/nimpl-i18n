@@ -5,13 +5,14 @@ export const metadata = {
     description: "",
 };
 
-type RootLayoutProps = { children: React.ReactNode; params: { lang: string } };
+type RootLayoutProps = { children: React.ReactNode; params: Promise<{ lang: string }> };
 
-export default function RootLayout({ children, params }: RootLayoutProps) {
-    if (!["en", "fr", "de"].includes(params.lang)) return notFound();
+export default async function RootLayout({ children, params }: RootLayoutProps) {
+    const { lang } = await params;
+    if (!["en", "fr", "de"].includes(lang)) return notFound();
 
     return (
-        <html lang={params.lang}>
+        <html lang={lang}>
             <body>{children}</body>
         </html>
     );
