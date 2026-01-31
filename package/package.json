@@ -6,26 +6,14 @@
     "./ClientTranslation": {
       "default": "./dist/ClientTranslation.js"
     },
-    "./getTranslation": {
-      "default": "./dist/getTranslation.js"
-    },
-    "./i18n": {
-      "default": "./dist/i18n.js"
-    },
-    "./I18nTransmitter": {
-      "default": "./dist/I18nTransmitter.js"
-    },
-    "./ServerTranslation": {
-      "default": "./dist/ServerTranslation.js"
+    "./initialize": {
+      "default": "./dist/initialize.js"
     },
     "./types": {
       "default": "./dist/types.js"
     },
     "./useTranslation": {
       "default": "./dist/useTranslation.js"
-    },
-    "./clientConfig": {
-      "default": "./dist/clientConfig.js"
     }
   },
   "files": [
