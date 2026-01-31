@@ -23,7 +23,7 @@ export const initialize = (config: Config) => {
     };
 
     const getTranslation = async (
-        options: Omit<GetTranslationCoreOptions, "dictionary" | "language"> & { language?: string },
+        options?: Omit<GetTranslationCoreOptions, "dictionary" | "language"> & { language?: string },
     ) => {
         const { language, ...rest } = options || {};
         const targetLanguage = language || (await config.getLanguage());
@@ -34,7 +34,7 @@ export const initialize = (config: Config) => {
             dictionary = await revalidate(targetLanguage);
         }
 
-        if (!language) {
+        if (!targetLanguage) {
             throw new Error(
                 "Unable to get the language in getTranslation. Please check the getLanguage method in the configuration file or pass the language as an argument.",
             );
@@ -44,9 +44,9 @@ export const initialize = (config: Config) => {
     };
 
     const ServerTranslation = async (
-        options: Omit<TranslationCoreProps, "dictionary" | "language"> & { language?: string },
+        props: Omit<TranslationCoreProps, "dictionary" | "language"> & { language?: string },
     ) => {
-        const { language, ...rest } = options || {};
+        const { language, ...rest } = props || {};
         const targetLanguage = language || (await config.getLanguage());
         let dictionary: Translates;
         if (config.cache) {
@@ -55,7 +55,7 @@ export const initialize = (config: Config) => {
             dictionary = await revalidate(targetLanguage);
         }
 
-        if (!language) {
+        if (!targetLanguage) {
             throw new Error(
                 "Unable to get the language in ServerTranslation. Please check the getLanguage method in the configuration file or pass the language as an argument.",
             );
@@ -76,7 +76,7 @@ export const initialize = (config: Config) => {
             dictionary = await revalidate(targetLanguage);
         }
 
-        if (!language) {
+        if (!targetLanguage) {
             throw new Error(
                 "Unable to get the language in Transmitter. Please check the getLanguage method in the configuration file or pass the language as an argument.",
             );

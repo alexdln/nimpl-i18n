@@ -9,17 +9,23 @@
   "module": "dist/esm/initialize.mjs",
   "types": "dist/cjs/initialize.d.ts",
   "exports": {
-    "./client-translation": {
-      "types": "./dist/cjs/client-translation.d.ts",
-      "import": "./dist/esm/client-translation.mjs",
-      "require": "./dist/cjs/client-translation.js",
-      "default": "./dist/esm/client-translation.mjs"
+    ".": {
+      "types": "./dist/cjs/initialize.d.ts",
+      "import": "./dist/esm/initialize.mjs",
+      "require": "./dist/cjs/initialize.js",
+      "default": "./dist/esm/initialize.mjs"
     },
     "./initialize": {
       "types": "./dist/cjs/initialize.d.ts",
       "import": "./dist/esm/initialize.mjs",
       "require": "./dist/cjs/initialize.js",
       "default": "./dist/esm/initialize.mjs"
+    },
+    "./client-translation": {
+      "types": "./dist/cjs/client-translation.d.ts",
+      "import": "./dist/esm/client-translation.mjs",
+      "require": "./dist/cjs/client-translation.js",
+      "default": "./dist/esm/client-translation.mjs"
     },
     "./types": {
       "types": "./dist/cjs/types.d.ts",
