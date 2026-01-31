@@ -1,6 +1,4 @@
-import getTranslation from "@nimpl/i18n/getTranslation";
-import ServerTranslation from "@nimpl/i18n/ServerTranslation";
-import I18nTransmitter from "@nimpl/i18n/I18nTransmitter";
+import { getTranslation, ServerTranslation, Transmitter } from "@src/i18n";
 import AdditionalHome from "../AdditionalHome";
 import AdditionalContacts from "../AdditionalContacts";
 
@@ -14,7 +12,11 @@ export default async function Additional({ page }: { page: string }) {
                 <ServerTranslation
                     term="additional.toTransfer"
                     components={{
-                        link: <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components" />,
+                        link: ({ children }) => (
+                            <a href="https://github.com/alexdln/nimpl-i18n?tab=readme-ov-file#client-components">
+                                {children}
+                            </a>
+                        ),
                     }}
                 />
             </p>
@@ -27,13 +29,13 @@ export default async function Additional({ page }: { page: string }) {
                 })}
             </p>
             {page === "home" ? (
-                <I18nTransmitter terms={["additionalHome"]}>
+                <Transmitter terms={["additionalHome"]}>
                     <AdditionalHome />
-                </I18nTransmitter>
+                </Transmitter>
             ) : (
-                <I18nTransmitter terms={["additionalContacts"]}>
+                <Transmitter terms={["additionalContacts"]}>
                     <AdditionalContacts />
-                </I18nTransmitter>
+                </Transmitter>
             )}
         </section>
     );

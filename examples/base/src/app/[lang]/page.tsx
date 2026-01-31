@@ -1,9 +1,10 @@
+import { getTranslation } from "@src/i18n";
+
 import LocaleSelect from "../../components/LocaleSelect";
 import Nav from "../../components/Nav";
 import Intro from "../../components/Intro";
 import HomeContent from "../../components/HomeContent";
 import Additional from "../../components/Additional";
-import getTranslation from "@nimpl/i18n/getTranslation";
 
 export default async function Home() {
     return (

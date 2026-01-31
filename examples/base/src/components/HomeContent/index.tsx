@@ -1,4 +1,4 @@
-import ServerTranslation from "@nimpl/i18n/ServerTranslation";
+import { ServerTranslation } from "@src/i18n";
 
 export default function HomeContent() {
     return (
@@ -7,8 +7,10 @@ export default function HomeContent() {
                 <ServerTranslation
                     term="homeContent.title"
                     components={{
-                        link: (
-                            <a href="https://github.com/alexdln/nimpl-i18n/examples/base/src/app/%5Blang%5D/page.tsx" />
+                        link: ({ children }) => (
+                            <a href="https://github.com/alexdln/nimpl-i18n/examples/base/src/app/%5Blang%5D/page.tsx">
+                                {children}
+                            </a>
                         ),
                     }}
                 />

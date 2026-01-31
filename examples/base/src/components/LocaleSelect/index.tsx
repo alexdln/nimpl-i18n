@@ -1,4 +1,4 @@
-import getTranslation from "@nimpl/i18n/getTranslation";
+import { getTranslation } from "@src/i18n";
 import Link from "next/link";
 
 const languages = ["en", "fr", "de"];
