@@ -36,6 +36,7 @@ jobs:
         if: "!contains(github.ref_name, 'canary')"
         run: |
           npm set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+          npm version --no-git-tag-version ${{github.ref_name}}
           npm publish --access public
         working-directory: ./package
 
