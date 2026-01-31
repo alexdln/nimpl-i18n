@@ -8,12 +8,16 @@ import { TransmitterCore, type TransmitterCoreProps } from "./lib/transmitter-co
 export const initialize = (config: Config) => {
     const cache = new Map<string, Translates | Promise<Translates>>();
 
-    const loadTranslates = async (language: string, revalidate?: boolean) => {
+    const loadTranslates = async (language: string, optional?: boolean) => {
         const item = cache.get(language);
 
-        if (!revalidate && item) return item;
-
-        if (item && "then" in item) {
+        const isPromise = item instanceof Promise;
+        if (item && (isPromise || optional)) {
+            if (isPromise) {
+                const dictionary = await item;
+                cache.set(language, dictionary);
+                return dictionary;
+            }
             return item;
         }
 
@@ -27,12 +31,7 @@ export const initialize = (config: Config) => {
     ) => {
         const { language, ...rest } = options || {};
         const targetLanguage = language || (await config.getLanguage());
-        let dictionary: Translates;
-        if (config.cache) {
-            dictionary = await loadTranslates(targetLanguage);
-        } else {
-            dictionary = await revalidate(targetLanguage);
-        }
+        const dictionary = await revalidate(targetLanguage, "foreground", config.cache);
 
         if (!targetLanguage) {
             throw new Error(
@@ -48,12 +47,7 @@ export const initialize = (config: Config) => {
     ) => {
         const { language, ...rest } = props || {};
         const targetLanguage = language || (await config.getLanguage());
-        let dictionary: Translates;
-        if (config.cache) {
-            dictionary = await loadTranslates(targetLanguage);
-        } else {
-            dictionary = await revalidate(targetLanguage);
-        }
+        const dictionary = await revalidate(targetLanguage, "foreground", config.cache);
 
         if (!targetLanguage) {
             throw new Error(
@@ -69,12 +63,7 @@ export const initialize = (config: Config) => {
     ) => {
         const { language, ...rest } = options || {};
         const targetLanguage = language || (await config.getLanguage());
-        let dictionary: Translates;
-        if (config.cache) {
-            dictionary = await loadTranslates(targetLanguage);
-        } else {
-            dictionary = await revalidate(targetLanguage);
-        }
+        const dictionary = await revalidate(targetLanguage, "foreground", config.cache);
 
         if (!targetLanguage) {
             throw new Error(
@@ -85,16 +74,13 @@ export const initialize = (config: Config) => {
         return <TransmitterCore {...rest} language={targetLanguage} dictionary={dictionary} />;
     };
 
-    const revalidate = async (language: string, background: boolean = false) => {
-        const item = cache.get(language);
-        if (item && "then" in item) return item;
-
-        if (background) {
-            const newData = await loadTranslates(language, true);
+    const revalidate = async (language: string, mode?: "background" | "foreground", optional?: boolean) => {
+        if (mode === "background") {
+            const newData = await loadTranslates(language, optional);
             return newData;
         }
 
-        const newDataPromise = loadTranslates(language, true);
+        const newDataPromise = loadTranslates(language, optional);
         cache.set(language, newDataPromise);
         return newDataPromise;
     };

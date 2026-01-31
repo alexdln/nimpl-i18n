@@ -85,7 +85,11 @@ describe("initialize", () => {
         });
 
         it("revalidates when config.cache is false", async () => {
-            const load = jest.fn().mockResolvedValue({ hello: "Hello" });
+            const load = jest
+                .fn()
+                .mockImplementation(
+                    () => new Promise((resolve) => setTimeout(() => resolve({ hello: "Hello" }), 1000)),
+                );
             const config = createMockConfig({ cache: false, load });
             const { getTranslation } = initialize(config);
 
@@ -104,8 +108,8 @@ describe("initialize", () => {
             const config = createMockConfig({ cache: true, load });
             const { revalidate } = initialize(config);
 
-            await revalidate("en", true);
-            await revalidate("en", true);
+            await revalidate("en", "background");
+            await revalidate("en", "background");
 
             expect(load).toHaveBeenCalledTimes(2);
         });
