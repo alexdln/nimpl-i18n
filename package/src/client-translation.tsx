@@ -3,8 +3,8 @@
 import React from "react";
 
 import { type I18nOptions } from "./types";
-import { Translation, type TranslationProps } from "./lib/Translation";
-import { useTranslation } from "./useTranslation";
+import { Translation, type TranslationProps } from "./lib/translation";
+import { useTranslation } from "./use-translation";
 
 type ClientTranslationProps = {
     term: string;

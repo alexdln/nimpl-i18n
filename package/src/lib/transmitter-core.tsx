@@ -2,7 +2,7 @@ import React from "react";
 import op from "object-path";
 
 import { type I18nOptions, type Translates } from "../types";
-import { ClientI18nProvider } from "./ClientI18nProvider";
+import { ClientProvider } from "./client-provider";
 import { formatTranslate } from "./format-translate";
 
 export type TransmitterCoreProps = {
@@ -52,8 +52,8 @@ export const TransmitterCore: React.FC<TransmitterCoreProps> = async ({
     });
 
     return (
-        <ClientI18nProvider language={language} translates={result} cleanThread={cleanThread}>
+        <ClientProvider language={language} translates={result} cleanThread={cleanThread}>
             {children}
-        </ClientI18nProvider>
+        </ClientProvider>
     );
 };

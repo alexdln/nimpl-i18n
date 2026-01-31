@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
 import { type I18nOptions } from "./types";
-import { ClientI18nContext } from "./lib/ClientI18nContext";
-import { injectQuery } from "./lib/injectQuery";
+import { ClientContext } from "./lib/client-context";
+import { injectQuery } from "./lib/inject-query";
 
 type GetTranslationReturnType = { t: (term: string, opts?: I18nOptions) => string; language: string };
 
 export const useTranslation = ({ namespace }: { namespace?: string } = {}): GetTranslationReturnType => {
-    const context = useContext(ClientI18nContext);
+    const context = useContext(ClientContext);
 
     if (!context) {
         throw new Error(

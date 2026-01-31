@@ -1,4 +1,4 @@
-import { parseEntities } from "@nimpl/i18n/lib/parseEntities";
+import { parseEntities } from "@nimpl/i18n/lib/parse-entities";
 
 describe("parseEntities", () => {
     it("decodes HTML entities", () => {
