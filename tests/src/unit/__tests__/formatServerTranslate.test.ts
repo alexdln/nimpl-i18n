@@ -1,8 +1,8 @@
-import { formatServerTranslate } from "@nimpl/i18n/lib/formatServerTranslate";
+import { formatTranslate } from "@nimpl/i18n/lib/format-translate";
 
 describe("formatServerTranslate", () => {
     it("injects query and parses entities by default", () => {
-        const result = formatServerTranslate({
+        const result = formatTranslate({
             term: "test",
             text: "Hello, {{name}}! &amp;",
             query: { name: "World" },
@@ -11,7 +11,7 @@ describe("formatServerTranslate", () => {
     });
 
     it("parses entities correctly", () => {
-        const result = formatServerTranslate({
+        const result = formatTranslate({
             term: "test",
             text: "&lt;div&gt;",
         });
@@ -19,7 +19,7 @@ describe("formatServerTranslate", () => {
     });
 
     it("skips entity parsing when parseEntities is false", () => {
-        const result = formatServerTranslate({
+        const result = formatTranslate({
             term: "test",
             text: "&lt;div&gt;",
             parseEntities: false,
@@ -28,14 +28,14 @@ describe("formatServerTranslate", () => {
     });
 
     it("respects removeUnusedQueries option", () => {
-        const result = formatServerTranslate({
+        const result = formatTranslate({
             term: "test",
             text: "Value: {{missing}}",
             query: {},
             removeUnusedQueries: true,
         });
         expect(result).toBe("Value: ");
-        const result2 = formatServerTranslate({
+        const result2 = formatTranslate({
             term: "test",
             text: "Value: {{missing}}",
             query: {},
